@@ -1,1 +1,22 @@
+Materi Github Fork
+
+GitHub Fork digunakan untuk membuat copy dari repository orang lain ke akun kita.
+
+Dengan melakukan fork, kita bisa:
+⦁	Mengembangkan proyek tanpa mengganggu proyek asli.
+⦁	Berkontribusi ke proyek open source dengan membuat perubahan lalu mengajukan pull request.
+⦁	Menyesuaikan proyek untuk keperluan pribadi atau organisasi.
+
+Kita bisa membuat salinan dari sebuah project ke akun GitHub kita, untuk membuat salinan nya:
+⦁	cari repository yang ingin di salin
+⦁	klik fork
+⦁	kita bisa membuat peubahan di repository orang lain, misalnya di branch master/main membuat file dengan nama "coba-fork", lalu di new file nya ketik "percobaan fork"
+⦁	lalu commit new file
+
+Untuk berkolaborasi:
+⦁ buka full request
+⦁	klik create full request lalu missal isi "coba fork" di add a comment
+⦁	klik comment
+
+link canva
 https://www.canva.com/design/DAGwqUcl1J0/UadQQz4X_Z8tX-1uJBho_w/edit?utm_content=DAGwqUcl1J0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
