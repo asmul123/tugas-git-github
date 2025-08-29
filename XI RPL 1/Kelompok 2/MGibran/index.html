@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konribusi</title>
+    <link rel="stylesheet" href="bootstrap-5.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="sticky-top">
+      <nav id="navbar-example2" class="navbar bg-danger px-3 mb-3">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspyHeading1" style="color: white"
+              >Konribusi</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div
+      data-bs-spy="scroll"
+      data-bs-target="#navbar-example2"
+      data-bs-root-margin="0px 0px -40%"
+      data-bs-smooth-scroll="true"
+      class="scrollspy-example bg-body-tertiary p-3 rounded-2"
+      tabindex="0"
+    >
+      <h4 id="scrollspyHeading1 mb-4">Kontribusiku Dalam Tim</h4>
+      <section id="home" class="jumbotron hero-section">
+        <div class="container text-center">
+          <h1 class="display-6">M. Gibran Rasyad Bais Sukmana</h1>
+        </div>
+      </section>
+      <!-- Akhir section jumbron -->
+
+      <!-- About Section -->
+      <section id="about" class="py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+              <p class="lead mb-4">
+                Saya berperan dalam pembuatan slide presentasi, khususnya pada
+                bagian Learning Objectives dan Topik. Selain itu, saya juga
+                menyusun dan memaparkan materi mengenai Git Melihat Detail
+                perubahan
+              </p>
+              <h3>git diff</h3>
+              <p class="lead mb-4">
+                Untuk melihat secera jelas perubahan yang terjadi Seperti baris
+                mana yang ditambah (+) atau dihapus (-)
+              </p>
+              <img src="img/Git diff.png" class="img mb-4" />
+              <h3>git status</h3>
+              <p class="lead mb-4">
+                Untuk menampilkan status file di repository seperti : File baru
+                (untracked), File yang berubah tapi belum di-stagge, dan File
+                yang sudah siap di-commit
+              </p>
+              <img src="img/Git Status.png" class="img mb-4" />
+              <p>
+                saat sudah di add akan berubah menjadi warna
+                hijau seperti ini yang artinya sudah siap di commit
+              </p>
+              <img src="img/Git staus add.png" class="img mb-4" />
+              <h3>git log</h3>
+              <p class="lead mb-4">
+                Berfungsi untuk melihat riwayat commit secara lengkap Seperti
+                siapa yang commit, kapan, dan pesan commit
+              </p>
+              <img src="img/Git log.png" class="img mb-4" />
+              <h3>git log oneline</h3>
+              <p class="lead mb-4">
+                Menampilkan riwayat commit secara singkat (1 baris per commit)
+                Supaya Lebih mudah dibaca dan untuk melihat daftar commit
+              </p>
+              <img src="img/Git log Oneline.png" class="img mb-4" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
