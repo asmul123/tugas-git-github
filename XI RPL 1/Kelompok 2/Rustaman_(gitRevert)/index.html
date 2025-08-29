@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Memahami git revert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-snap-type:y mandatory;height:100%;scroll-behavior:smooth;overscroll-behavior-y:none}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;background:#ffffff;color:#111;line-height:1.45;-webkit-font-smoothing:antialiased;min-height:100%;overflow-x:hidden}
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4rem clamp(1rem,4vw,4rem);text-align:center;position:relative;scroll-snap-align:start;scroll-snap-stop:always;opacity:0;background:#ffffff}
+.hero{background:#ffffff;position:relative;opacity:1!important}
+.hero h1{font-size:clamp(2.8rem,8vw,5rem);line-height:1.05;color:#000;font-weight:800;letter-spacing:-.02em}
+.hero p{max-width:52ch;margin:1.5rem auto 0;font-size:clamp(1.05rem,1.6vw,1.35rem);opacity:.7;color:#222}
+.grid{display:grid;gap:1.5rem;width:100%;max-width:1100px;margin-top:3rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:#fafafa;border:1px solid #e4e4e4;padding:1.25rem 1.1rem;border-radius:18px;position:relative;overflow:hidden}
+.card h3{font-size:1.05rem;margin-bottom:.55rem;font-weight:600;letter-spacing:.5px;color:#000}
+.card p{font-size:.82rem;opacity:.7;color:#222}
+.badge{position:absolute;top:.6rem;right:.8rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;background:#000;padding:.35rem .5rem;border-radius:6px;color:#fff}
+section.alt{background:#f5f5f5}
+.tagline{font-size:clamp(1.9rem,5vw,3rem);font-weight:700;max-width:18ch;line-height:1.1;color:#000}
+.split{display:flex;flex-direction:column;gap:2.2rem;max-width:1050px;width:100%}
+@media (min-width:880px){.split{flex-direction:row;align-items:flex-start}.split .text{flex:1;padding-right:2.5rem;text-align:left}.split .steps{flex:1;text-align:left}}
+.steps{counter-reset:stp}
+.steps div{margin-bottom:1.3rem;padding:.9rem 1rem .95rem 1.05rem;border-left:3px solid #000;background:#f2f2f2;border-radius:10px}
+.steps div h4{margin-bottom:.35rem;font-size:.9rem;font-weight:600;letter-spacing:.5px;color:#000}
+.steps div p{font-size:.8rem;opacity:.75;color:#222}
+.code{font-family:ui-monospace,Consolas,monaco,monospace;background:#000;color:#fff;padding:.55rem .7rem;border-radius:8px;font-size:.72rem;display:inline-block;margin-top:.35rem}
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2.2rem}
+.compare .box{background:#f2f2f2;border:1px solid #e4e4e4;border-radius:14px;padding:1rem 1rem 1.1rem;text-align:left;position:relative}
+.compare .box h5{font-size:.85rem;letter-spacing:.05em;margin-bottom:.5rem;color:#000}
+.compare .box p{font-size:.75rem;opacity:.75;color:#222}
+footer{padding:3rem 1.5rem 4rem;text-align:center;font-size:.7rem;color:#555;background:#f2f2f2}
+svg{width:210px;height:210px;margin-top:2.2rem;filter:none}
+button.cta{margin-top:2.2rem;background:#000;color:#fff;font-weight:600;font-size:.85rem;padding:.85rem 1.35rem;border:none;border-radius:30px;cursor:pointer;letter-spacing:.5px;transition:.35s}
+button.cta:hover{transform:translateY(-3px);background:#111}
+.fade{opacity:0;transform:translateY(40px)}
+.credits{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:#555;font-weight:500;pointer-events:none;opacity:.85;backdrop-filter:blur(2px)}
+.credits span{margin:0 .55em;white-space:nowrap}
+.split-char{display:inline-block;transform:translateY(1.1em) scale(.9) rotateX(65deg);opacity:0;will-change:transform,opacity;perspective:400px}
+.split-word{display:inline-block;overflow:hidden}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+<h1 class="fade">git revert</h1>
+<p class="fade">Perintah untuk membalikkan efek suatu commit dengan membuat commit baru. Tidak menghapus atau menulis ulang riwayat; aman dipakai setelah perubahan dipublikasikan.</p>
+<div class="grid">
+<div class="card fade"><span class="badge">Dasar</span><h3>Definisi</h3><p>Membuat commit pembalik yang menambahkan kebalikan patch commit target.</p></div>
+<div class="card fade"><span class="badge">Bedakan</span><h3>vs reset</h3><p><b>reset</b> memindah pointer branch; bisa menghapus jejak. <b>revert</b> menambah jejak baru.</p></div>
+<div class="card fade"><span class="badge">Tim</span><h3>Kolaborasi</h3><p>Tidak memaksa force push; histori tetap dapat diaudit.</p></div>
+<div class="card fade"><span class="badge">Granular</span><h3>Selektif</h3><p>Bebas pilih commit lama/tengah/head tanpa memengaruhi commit lain.</p></div>
+</div>
+<svg id="orbit" viewBox="0 0 200 200" fill="none">
+<path id="p1" stroke="#111" stroke-width="2" d="M100 15c55 0 85 30 85 85s-30 85-85 85S15 155 15 100 45 15 100 15Z"/>
+<path id="dot" fill="#333" d="M100 15a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/>
+</svg>
+<button class="cta fade" onclick="window.scrollTo({top:innerHeight,behavior:'smooth'})">Pelajari</button>
+<div class="credits fade" style="bottom:2.2rem"><span>Rustaman Delvianova</span><span>Kelompok 2</span><span>XI RPL 1</span></div>
+</section>
+<section class="alt">
+<div class="split">
+<div class="text">
+<div class="tagline fade">Konsep Inti git revert</div>
+<p class="fade" style="margin-top:1.3rem;font-size:.93rem;opacity:.85">Alih‑alih menghapus commit salah, kita tambahkan commit baru yang membatalkan patch. Ini menjaga histori kronologis sehingga investigasi masa depan tetap transparan. Setiap revert adalah catatan eksplisit "apa" dan "mengapa".</p>
+<div class="compare fade">
+<div class="box"><h5>revert</h5><p>Mencatat rollback eksplisit; histori lengkap utuh. Baik untuk branch publik.</p><span class="code">git revert &lt;hash&gt;</span></div>
+<div class="box"><h5>reset</h5><p>Menulis ulang pointer; rawan konflik kolaborasi jika sudah dipush. Hindari --hard di branch bersama.</p><span class="code">git reset --hard &lt;hash&gt;</span></div>
+</div>
+</div>
+<div class="steps">
+<div class="fade"><h4>1. Temukan</h4><p>Lihat daftar singkat. <span class="code">git log --oneline</span></p></div>
+<div class="fade"><h4>2. Revert tunggal</h4><p>Balik satu commit. <span class="code">git revert a1b2c3d</span></p></div>
+<div class="fade"><h4>3. Konflik</h4><p>Selesaikan manual lalu <span class="code">git add .</span> & <span class="code">git revert --continue</span></p></div>
+<div class="fade"><h4>4. Banyak</h4><p>Rentang terakhir 3: <span class="code">git revert HEAD~3..HEAD</span></p></div>
+<div class="fade"><h4>5. Merge</h4><p>Revert merge: <span class="code">git revert -m 1 &lt;merge_hash&gt;</span> (1=parent utama)</p></div>
+</div>
+</div>
+</section>
+<section>
+<div class="tagline fade">Sintaks & Contoh</div>
+<p class="fade" style="margin-top:1rem;max-width:60ch">Revert dasar: <span class="code">git revert &lt;hash&gt;</span>. Banyak hash berurutan: jalankan berantai atau gunakan rentang. Komit non-berurutan: sebutkan satu per satu. Membatalkan revert (membalik revert) cukup revert commit revert tersebut.</p>
+</section>
+<section class="alt">
+<div class="tagline fade">Revert Merge & Konflik</div>
+<p class="fade" style="margin-top:1rem;max-width:60ch">Saat revert merge, git butuh tahu parent mana yang dianggap baseline: gunakan <span class="code">-m 1</span> (parent pertama). Konflik umum: file sudah berubah setelah commit target. Strategi: fokuskan patch; bila patch besar dan banyak noise formatting, pertimbangkan refactor terpisah sebelum revert.</p>
+</section>
+<section>
+<div class="tagline fade">Best Practice & Anti-Pattern</div>
+<p class="fade" style="margin-top:1rem;max-width:60ch">Gunakan revert untuk: rollback aman setelah deploy, membatalkan fitur eksperimental, audit jelas. Hindari: menumpuk revert atas revert tanpa perbaikan akar, mengandalkan revert untuk uji coba yang mestinya pakai feature flag. Format pesan: <span class="code">revert: batalkan fitur pencarian cepat (#123)</span>.</p>
+</section>
+<section class="alt">
+<div class="tagline fade">Ringkasan Cepat</div>
+<div class="grid" style="margin-top:2.5rem">
+<div class="card fade"><h3>Kapan</h3><p>Bug pasca push, rollback parsial, butuh jejak jelas.</p></div>
+<div class="card fade"><h3>Plus</h3><p>Tidak rewrite sejarah, mudah audit, minim risiko tim.</p></div>
+<div class="card fade"><h3>Minus</h3><p>Histori bisa ramai, konflik saat basis sudah banyak berubah.</p></div>
+<div class="card fade"><h3>Tips</h3><p>Commit kecil fokus; hindari gabung refactor + fitur; review sebelum revert.</p></div>
+</div>
+</section>
+</main>
+<footer>git revert – Rustaman Delvianova · Kelompok 2 · XI RPL 1 | © 2025</footer>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/MotionPathPlugin.min.js"></script>
+<script src="vendor/Scripts.min.js"></script>
+</body>
+</html>
