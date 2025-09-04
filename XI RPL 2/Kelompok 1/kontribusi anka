@@ -1,0 +1,180 @@
+<html lang="id"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kontribusi Saya – Kelompok 1: Kembali ke Masa Lalu tentang GitHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0f172a;        /* slate-900 */
+      --card: #111827;      /* gray-900 */
+      --muted: #94a3b8;     /* slate-400 */
+      --text: #e2e8f0;      /* slate-200 */
+      --accent: #60a5fa;    /* blue-400 */
+      --accent-2: #22d3ee;  /* cyan-400 */
+      --ring: rgba(96,165,250,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,"Noto Sans",sans-serif;
+      background: radial-gradient(1200px 600px at 10% 0%,rgba(34,211,238,.15),transparent 60%),
+                  radial-gradient(800px 400px at 90% 10%,rgba(96,165,250,.18),transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+    a{color:var(--accent);text-decoration:none}
+    header{
+      position:relative;
+      overflow:hidden;
+      padding: clamp(48px, 6vw, 96px) 24px;
+      text-align:center;
+    }
+    .hero{
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #334155;border-radius:999px;color:var(--muted);backdrop-filter: blur(6px);}
+    .badge svg{width:16px;height:16px}
+    h1{font-size: clamp(28px, 5.2vw, 56px);line-height:1.1;margin:16px 0}
+    .subtitle{color:var(--muted);max-width:780px;margin:0 auto}
+
+    .cta{margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{
+      padding:12px 18px;border-radius:14px;border:1px solid #334155;background:linear-gradient(180deg,#0b1220, #0a1424);
+      color:var(--text);cursor:pointer;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px -12px var(--ring);border-color:#475569}
+    .btn.primary{background:linear-gradient(180deg, #1d4ed8, #1e40af);border-color:#1d4ed8}
+    .btn.primary:hover{box-shadow:0 12px 26px -12px rgba(29,78,216,.55)}
+
+    main{max-width:1100px;margin: 0 auto;padding: 0 20px 80px}
+    .grid{display:grid;gap:18px}
+    @media (min-width: 880px){
+      .grid{grid-template-columns: 1.15fr .85fr}
+    }
+    .card{
+      background: linear-gradient(180deg,#0b1220, #0a1424);
+      border:1px solid #1f2937; /* gray-800 */
+      border-radius:20px;padding:22px 22px 20px;
+      box-shadow: 0 10px 30px -18px rgba(0,0,0,.6);
+    }
+    .card h2{margin:0 0 8px;font-size:clamp(18px,2.8vw,26px)}
+    .muted{color:var(--muted)}
+
+    .kpi{
+      display:grid;grid-template-columns: repeat(3,minmax(0,1fr));gap:12px;margin-top:14px
+    }
+    .kpi .item{border:1px dashed #334155;border-radius:16px;padding:14px;text-align:center}
+    .kpi .num{font-size:clamp(18px,3vw,28px);font-weight:700}
+    .kpi .lab{color:var(--muted);font-size:12px}
+
+    .list{display:grid;gap:10px;margin:14px 0}
+    .list .li{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid #243244;border-radius:14px;background:rgba(2,6,23,.35)}
+    .list .li svg{min-width:20px;margin-top:2px}
+
+    .timeline{position:relative;margin-top:6px;padding-left:22px}
+    .timeline::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent-2));opacity:.55}
+    .event{position:relative;margin:14px 0;padding-left:14px}
+    .event::before{content:"";position:absolute;left:-7px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 0 0 3px rgba(34,211,238,.15)}
+    .event h4{margin:0 0 4px}
+
+    .twocol{display:grid;gap:14px}
+    @media(min-width:780px){.twocol{grid-template-columns:1fr 1fr}}
+
+    .code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:.92rem; background:#0b1220;border:1px solid #1f2a3b;border-radius:14px;padding:14px;overflow:auto
+    }
+
+    footer{padding:30px 20px;color:var(--muted);text-align:center}
+
+    /* tiny flourish */
+    .glow{position:absolute;inset:auto -40% -60% -40%;height:240px;filter:blur(60px);background:radial-gradient(closest-side, rgba(34,211,238,.12), transparent), radial-gradient(closest-side, rgba(96,165,250,.12), transparent)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="hero">
+      <span class="badge" title="Kelompok 1">
+        <!-- people icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        Kelompok 1 • Kembali ke Masa Lalu: GitHub
+      </span>
+      <h1>Kontribusi Saya dalam Presentasi “Kembali ke Masa Lalu tentang GitHub”</h1>
+      
+      <div class="cta">
+        <a class="btn primary" href="#peran">Lihat Kontribusi Saya</a>
+        <a class="btn" href="#materi">Materi Git &amp; GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid" id="peran" aria-labelledby="peran-title">
+      <article class="card">
+        <h2 id="peran-title">Ringkasan  &amp; Kontribusi</h2>
+        <p class="muted">Fokus pada kualitas materi, visual, dan pembukaan yang kuat untuk mengarahkan alur presentasi tim.</p>
+        <div class="kpi" role="list" aria-label="Indikator kontribusi">
+          <div class="item" role="listitem">
+            <div class="num">PPT &amp; membuat Slide Show</div>
+            <div class="lab">Menyusun struktur &amp; desain</div>
+          </div>
+          <div class="item" role="listitem">
+            <div class="num">Pembukaan Presentasi</div>
+            <div class="lab">Menyapa &amp; framing topik</div>
+          </div>
+          <div class="item" role="listitem">
+            <div class="num">Materi Dasar</div>
+            <div class="lab">Apa itu Git &amp; GitHub</div>
+          </div>
+        </div>
+
+        <div class="list" aria-label="Detail peran">
+          <div class="li">
+            <!-- sparkles icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v5M3 5h4"></path><path d="M19 14v7"></path><path d="M14 19h10"></path><path d="M7 14s1.5 2 5 2 5-2 5-2"></path></svg>
+            <div>
+              <strong>Membuat PPT &amp; Slide Show:</strong>
+              <div class="muted">Mendesain template minimalis, konsisten tipografi, animasi seperlunya, dan transisi halus. Menyusun alur: <em>pembukaan → sejarah singkat → konsep Git → GitHub → demo/ilustrasi</em>.</div>
+            </div>
+          </div>
+          <div class="li">
+            <!-- mic icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1v11"></path><rect x="7" y="1" width="10" height="14" rx="5"></rect><path d="M19 11a7 7 0 0 1-14 0"></path><path d="M12 19v4"></path></svg>
+            <div>
+              <strong>Pembukaan Presentasi:</strong>
+              <div class="muted">Membangun konteks: mengapa <em>version control</em> penting, analogi “kembali ke masa lalu” untuk mengulas riwayat perubahan kode.</div>
+            </div>
+          </div>
+          <div class="li">
+            <!-- book icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M20 22H6.5A2.5 2.5 0 0 1 4 19.5V6.5A2.5 2.5 0 0 1 6.5 4H20"></path></svg>
+            <div>
+              <strong>Menjelaskan Apa itu Git &amp; GitHub:</strong>
+              <div class="muted">Menjadi narasumber bagian fundamental agar audiens paham perbedaan Git (alat) dan GitHub (platform kolaborasi berbasis Git).</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      
+    </section>
+
+    
+
+    
+
+    
+  </main>
+
+  <footer>
+    <small>© <span id="y">2025</span> Kelompok 1 • Dibuat untuk dokumentasi pembelajaran</small>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
